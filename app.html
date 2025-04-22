@@ -1,9 +1,9 @@
-<!-- pages/dashboard.html -->
+<!-- pages/index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Home</title>
+  <title>app</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="/styles/tokens.css">
   <link rel="stylesheet" href="/styles/base.css">
@@ -11,16 +11,11 @@
   <script type="module" src="../components/layout/dt-layout.js" defer></script> 
   <script type="module" src="../components/sidebar/dt-sidebar.js" defer></script>
   <script type="module" src="../components/navbar/dt-navbar.js" defer></script>
+  <script type="module" src="./router.js" defer></script>
 </head>
 <body>
-  <div slot="content">  <!-- É DEFINIDO O CONTEÚDO ESPECÍFICO DE CADA PÁGINA-->
-    <h2>hello world</h2>  
-    <p>Este é o conteúdo da página principal</p>        
-     <dt-button variant="success">teste</dt-button> </br></br></br>
-     <dt-button  icon="fa-solid fa-bars">teste</dt-button>
-     <dt-button icon="fas fa-edit" variant="normal"></dt-button>
-    <dt-button icon="fas fa-trash" variant="danger"></dt-button>
-    <dt-button icon="fas fa-edit" variant="normal" disabled>disabled</dt-button>        
-  </div>
+  <main id="app">          
+    <!--Aqui entra o conteúdo dinâmico de cada rota-->
+  </main>
 </body>
 </html>

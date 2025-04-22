@@ -96,10 +96,11 @@ class DtSidebar extends HTMLElement {
     connectedCallback() {
         // Defina os itens que deseja exibir dinamicamente
         const menuItems = [
-            { label: "Home", icon: "fa-house", href: "home.html" },
-            { label: "Cart", icon: "fa-cart-shopping", href: "cart.html" },
-            { label: "Store", icon: "fa-store", href: "store.html" },
-            { label: "Admin", icon: "fa-user-shield", href: "admin.html" }
+            { label: "Home", icon: "fa-house", href: "#/home" },
+            { label: "Cart", icon: "fa-cart-shopping", href: "#/cart" },
+            { label: "Store", icon: "fa-store", href: "#/store" },
+            { label: "Admin", icon: "fa-user-shield", href: "#/admin" },  
+            { label: "Money", icon: "fa-solid fa-money-bill", href: "#/Money" }            
         ]
 
         this.render(menuItems)
@@ -143,18 +144,27 @@ class DtSidebar extends HTMLElement {
         const updateActiveItems = () => {
             const items = this.shadowRoot.querySelectorAll('.side-item')
             items.forEach(item => {                
-                item.addEventListener('click', (e) => {
-                    e.preventDefault()
+                item.addEventListener('click', (e) => {                    
                     items.forEach(i => i.classList.remove('active'))
                     item.classList.add('active')
 
-                    const link = item.querySelector('a')
-                    if(link) window.location.href = link.getAttribute('href')
                 })
             })
         }
 
         updateActiveItems()
+    }
+
+    updateActiveByRoute(route) {
+        const items = this.shadowRoot.querySelectorAll(".side-item")
+        items.forEach(item => {
+            const link = item.querySelector("a")
+            if (link && link.getAttribute("href") === route) {
+                item.classList.add("active")
+            } else {
+                item.classList.remove("active")
+            }
+        })
     }
 }
 
