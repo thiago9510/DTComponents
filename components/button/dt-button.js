@@ -1,8 +1,27 @@
 class DtButton extends HTMLElement {
+    static get observedAttributes () {
+        return ['disabled', 'icon', 'variant']
+    }
+
     constructor() {
         super()
         this.attachShadow({ mode: 'open' })
+        this.render()
+    }
 
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'disabled' && this.shadowRoot) {
+            const btn = this.shadowRoot.querySelector('button');
+            if (btn) {
+                btn.disabled = this.hasAttribute('disabled');
+            }
+        } else {
+            // Se mudar icon ou variant, re-renderiza tudo
+            this.render();
+        }
+    }
+
+    render () {
         const iconClass = this.getAttribute('icon')
         const variant = this.getAttribute('variant') || 'normal'
         const hasText = this.innerHTML.trim() !== ''
@@ -108,7 +127,6 @@ class DtButton extends HTMLElement {
                 this.dispatchEvent(new Event('click', { bubbles: true, composed: true }));
             }
         })
-
     }
 }
 

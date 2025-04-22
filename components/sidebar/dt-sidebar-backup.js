@@ -1,7 +1,7 @@
 class DtSidebar extends HTMLElement {
     constructor() {
         super()
-        this.attachShadow({ mode: "open" }) //Cria o Shadow Dom do Elemento
+        this.attachShadow({ mode: "open" })
         this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
             <style>               
@@ -81,81 +81,47 @@ class DtSidebar extends HTMLElement {
 
             <div class="sidebar">                
                 <div class="side-items">
-                    <div class="side-item">                       
-                        <a href="#" id="menu">                            
-                            <i class="fa-solid fa-bars"></i>                           
-                            <span class="item-description">Menu</span>
-                        </a>
-                    </div>
-                    <!-- Os demais itens serão inseridos dinamicamente -->
+                <div class="side-item">                       
+                    <a href="#" id="menu">                            
+                    <i class="fa-solid fa-bars"></i>                           
+                    <span class="item-description">Menu</span>
+                    </a>
+                </div>
+
+                <div class="side-item">
+                    <a href="#">
+                    <i class="fa-solid fa-cart-shopping"></i>                                                 
+                    <span class="item-description">Cart</span>
+                    </a>
+                </div>
+
+                <div class="side-item">
+                    <a href="#">
+                    <i class="fa-solid fa-store"></i>
+                    <span class="item-description">Store</span>
+                    </a>
+                </div>
                 </div>
             </div>        
-        `    
+        `        
     }
 
     connectedCallback() {
-        // Defina os itens que deseja exibir dinamicamente
-        const menuItems = [
-            { label: "Home", icon: "fa-house", href: "home.html" },
-            { label: "Cart", icon: "fa-cart-shopping", href: "cart.html" },
-            { label: "Store", icon: "fa-store", href: "store.html" },
-            { label: "Admin", icon: "fa-user-shield", href: "admin.html" }
-        ]
-
-        this.render(menuItems)
-        this.setupEvents()
-    }
-
-    render(items) {
-        const container = this.shadowRoot.querySelector('.side-items')
-        const allItems = container.querySelectorAll('.side-item')
-
-        // Mantém apenas o primeiro item (botão menu), remove os outros (faz um reset do menu)
-        allItems.forEach((item, index) => {            
-            if (index !== 0) item.remove()
-        })
-
-        items.forEach(item => {            
-            const div = document.createElement('div')
-            div.classList.add('side-item')
-            div.innerHTML = `
-                <a href="${item.href}">
-                    <i class="fa-solid ${item.icon}"></i>
-                    <span class="item-description">${item.label}</span>
-                </a>
-            `
-            container.appendChild(div)
-        })
-    }
-
-    setupEvents() {
-        //methodo para validar os eventos (click)
         const sidebar = this.shadowRoot.querySelector('.sidebar')
         const menuButton = this.shadowRoot.querySelector('#menu')
+        const items = this.shadowRoot.querySelectorAll('.side-item')
 
-        // Expande/colapsa o menu
-        menuButton.addEventListener('click', (e) => {
-            e.preventDefault()
-            sidebar.classList.toggle('open-sidebar') // coloca ou remove a classe ( ou seja, ao clicar no elemento ele remove ou adiciona a classe)
+        menuButton.addEventListener('click', () => {
+            sidebar.classList.toggle('open-sidebar')
         });
 
-        // Ativa item selecionado
-        const updateActiveItems = () => {
-            const items = this.shadowRoot.querySelectorAll('.side-item')
-            items.forEach(item => {                
-                item.addEventListener('click', (e) => {
-                    e.preventDefault()
-                    items.forEach(i => i.classList.remove('active'))
-                    item.classList.add('active')
-
-                    const link = item.querySelector('a')
-                    if(link) window.location.href = link.getAttribute('href')
-                })
+        items.forEach(item => {
+            item.addEventListener('click', e => {
+                e.preventDefault();
+                items.forEach(i => i.classList.remove('active'))
+                item.classList.add('active')
             })
-        }
-
-        updateActiveItems()
+        })
     }
 }
-
-customElements.define('dt-sidebar', DtSidebar);
+customElements.define('dt-sidebar', DtSidebar)
