@@ -36,7 +36,7 @@ class DtLayout extends HTMLElement {
             <div class="second-container">
             <dt-sidebar id="sidebar-component"></dt-sidebar> <!-- aqui entra o componente dt-sidebar -->     
                 <div class="main">
-                 <slot name="content"></slot> <!-- Aqui vai o conteúdo da página -->
+                 <slot name="content"></slot> <!-- "Tudo que for filho de <dt-layout> e tiver slot="content" será renderizado aqui". -->
                 </div> 
             </div>
         </div>             

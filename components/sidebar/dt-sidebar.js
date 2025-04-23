@@ -82,7 +82,7 @@ class DtSidebar extends HTMLElement {
             <div class="sidebar">                
                 <div class="side-items">
                     <div class="side-item">                       
-                        <a href="#" id="menu">                            
+                        <a id="menu" class="menu-toggle">                            
                             <i class="fa-solid fa-bars"></i>                           
                             <span class="item-description">Menu</span>
                         </a>
@@ -101,10 +101,16 @@ class DtSidebar extends HTMLElement {
             { label: "Store", icon: "fa-store", href: "#/store" },
             { label: "Admin", icon: "fa-user-shield", href: "#/admin" },  
             { label: "Money", icon: "fa-solid fa-money-bill", href: "#/Money" }            
-        ]
+        ]  
 
         this.render(menuItems)
         this.setupEvents()
+        this.updateActiveByRoute(window.location.hash)          
+
+        // Atualiza o item ativo ao mudar o hash
+        window.addEventListener("hashchange", () => {
+            this.updateActiveByRoute(window.location.hash)
+        })
     }
 
     render(items) {
@@ -130,29 +136,15 @@ class DtSidebar extends HTMLElement {
     }
 
     setupEvents() {
-        //methodo para validar os eventos (click)
+        //methodo para validar os eventos de click no menu
         const sidebar = this.shadowRoot.querySelector('.sidebar')
         const menuButton = this.shadowRoot.querySelector('#menu')
 
-        // Expande/colapsa o menu
-        menuButton.addEventListener('click', (e) => {
-            e.preventDefault()
-            sidebar.classList.toggle('open-sidebar') // coloca ou remove a classe ( ou seja, ao clicar no elemento ele remove ou adiciona a classe)
-        });
-
-        // Ativa item selecionado
-        const updateActiveItems = () => {
-            const items = this.shadowRoot.querySelectorAll('.side-item')
-            items.forEach(item => {                
-                item.addEventListener('click', (e) => {                    
-                    items.forEach(i => i.classList.remove('active'))
-                    item.classList.add('active')
-
-                })
-            })
-        }
-
-        updateActiveItems()
+        // Expande/colapsa o menu só se clicar no botão
+        menuButton.addEventListener('click', (e) => {            
+            e.stopPropagation()
+            sidebar.classList.toggle('open-sidebar')    
+        })
     }
 
     updateActiveByRoute(route) {

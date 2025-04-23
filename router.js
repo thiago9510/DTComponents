@@ -18,11 +18,11 @@ async function loadRoute() {
   const res = await fetch(route.page)
   const html = await res.text()
 
-  // Verve para verificar o layout usado na página
+  // serve para verificar o layout usado na página
   if (route.layout === "main") {
     const layout = document.createElement("dt-layout")
     const slot = document.createElement("div")
-    slot.setAttribute("slot", "content")
+    slot.setAttribute("slot", "content") //"Eu quero que esta <div> seja o conteúdo do slot content do <dt-layout>."
     slot.innerHTML = html
     layout.appendChild(slot)
     appElement.innerHTML = ""
