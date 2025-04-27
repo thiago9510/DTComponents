@@ -79,7 +79,7 @@ class DtSidebar extends HTMLElement {
                 }
             </style>
 
-            <div class="sidebar">                
+            <div class="sidebar open-sidebar">                
                 <div class="side-items">
                     <div class="side-item">                       
                         <a id="menu" class="menu-toggle">                            
@@ -99,8 +99,7 @@ class DtSidebar extends HTMLElement {
             { label: "Home", icon: "fa-house", href: "#/home" },
             { label: "Cart", icon: "fa-cart-shopping", href: "#/cart" },
             { label: "Store", icon: "fa-store", href: "#/store" },
-            { label: "Admin", icon: "fa-user-shield", href: "#/admin" },  
-            { label: "Money", icon: "fa-solid fa-money-bill", href: "#/Money" }            
+            { label: "Admin", icon: "fa-user-shield", href: "#/admin" }                      
         ]  
 
         this.render(menuItems)

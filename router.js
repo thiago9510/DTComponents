@@ -1,7 +1,8 @@
 const routes = {
   "#/home": { page: "pages/home.html", layout: "main" },
   "#/cart": { page: "pages/cart.html", layout: "main" },
-  "#/admin": { page: "pages/admin.html", layout: "admin" },
+  "#/store": { page: "pages/store.html", layout: "main" },
+  "#/admin": { page: "pages/admin.html", layout: "main" },
   "#/login": { page: "pages/login.html", layout: null }, // sem layout
 }
 
